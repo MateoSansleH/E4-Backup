@@ -50,8 +50,8 @@ backup_DC1(){
     ##
     mkdir -p /media/partage
     mkdir -p /home/backup_user/temp/DC1
-    mount -t cifs ${DC1_LDAP_PARTAGE} /media/partage -o username=${DC1_LDAP_USER},workgroup=${DC1_LDAP_DOMAIN},password=${DC1_LDAP_DOMAIN}
-    mv /media/partage/${DC1_LDAP_FOLDER_BACKUP} /home/backup_user/temp/DC1
+    mount -t cifs //10.152.53.2/sauvegardes /media/partage -o username=${DC1_LDAP_USER},workgroup=${DC1_LDAP_DOMAIN},password=${DC1_LDAP_DOMAIN}
+    mv /media/partage/WindowsImageBackup /home/backup_user/temp/DC1
     umount /media/partage
 }
 
