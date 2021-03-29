@@ -11,11 +11,9 @@
 
 #Backup DC1
 #l'utilisateur AD backup_user est le seul avec l'administrateur a avoir acces au partage "Sauvegarde"
-DC1_LDAP_USER="backup_user"
-DC1_LDAP_PASSWORD="Not24get"
-DC1_LDAP_DOMAIN="megaprod.lan"
-DC1_LDAP_PARTAGE="//10.152.53.2/sauvegardes"
-DC1_LDAP_FOLDER_BACKUP="WindowsImageBackup"
+LDAP_USER="backup_user"
+LDAP_PASSWORD="Not24get"
+LDAP_DOMAIN="megaprod.lan"
 
 
 DATESAVE=$(date "+%Y%m%d")
@@ -39,7 +37,7 @@ creation_backupfolder(){
     ##  Création du repertoire contenant la sauvegarde du jour. 
     ##          - forme backup-megaprod-20210329
     ##
-    mkdir -p /home/backup_user/Backup/backup-megaprod-${DATESAVE}
+    mkdir -p /home/backup_user/temp/backup-megaprod-${DATESAVE}
 }
 
 backup_DC1(){
@@ -49,9 +47,9 @@ backup_DC1(){
     ##  Demontage / fermeture du partage du partage
     ##
     mkdir -p /media/partage
-    mkdir -p /home/backup_user/temp/DC1
-    mount -t cifs //10.152.53.2/sauvegardes /media/partage -o username=${DC1_LDAP_USER},workgroup=${DC1_LDAP_DOMAIN},password=${DC1_LDAP_DOMAIN}
-    mv /media/partage/WindowsImageBackup /home/backup_user/temp/DC1
+    mkdir -p /home/backup_user/backup-megaprod-${DATESAVE}/DC1
+    mount -t cifs //10.152.53.2/sauvegardes /media/partage -o username=${LDAP_USER},workgroup=${LDAP_DOMAIN},password=${LDAP_PASSWORD}
+    mv /media/partage/WindowsImageBackup /home/backup_user/backup-megaprod-${DATESAVE}/DC1
     umount /media/partage
 }
 
