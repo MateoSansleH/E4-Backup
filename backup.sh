@@ -11,7 +11,7 @@
 
 #Backup DC1
 #l'utilisateur AD backup_user est le seul avec l'administrateur a avoir acces au partage "Sauvegarde"
-LDAP_USER="backup_user"
+LDAP_USER="administrateur"
 LDAP_PASSWORD="Not24get"
 LDAP_DOMAIN="megaprod.lan"
 
@@ -49,6 +49,7 @@ backup_DC1(){
     mkdir -p /media/partage
     mkdir -p /home/backup_user/backup-megaprod-${DATESAVE}/DC1
     mount -t cifs //10.152.53.2/sauvegardes /media/partage -o username=${LDAP_USER},workgroup=${LDAP_DOMAIN},password=${LDAP_PASSWORD}
+    mv /root/sauvegarde_nextcloud_${DATESAVE}.tar.gz /media/partage
     mv /media/partage/WindowsImageBackup /home/backup_user/backup-megaprod-${DATESAVE}/DC1
     umount /media/partage
 }
