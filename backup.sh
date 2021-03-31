@@ -14,7 +14,6 @@
 LDAP_USER="administrateur"
 LDAP_PASSWORD="Not24get"
 LDAP_DOMAIN="megaprod.lan"
-LDAP_FOLDER_SAVE="WindowsImageBacku"
 
 DATESAVE=$(date "+%Y%m%d")
 
@@ -54,9 +53,9 @@ backup_DC1(){
 }
 
 compression_DC1(){
-    cd /home/backup_user/backup-megaprod-${DATESAVE}/
-    tar czf DC1.tar.gz /home/backup_user/backup-megaprod-${DATESAVE}/
-    rm -rf /home/backup_user/backup-megaprod-${DATESAVE}/DC1
+    cd /home/backup_user/temp/
+    tar czf DC1.tar.gz DC1
+    rm -rf DC1
 }
 
 
@@ -64,7 +63,7 @@ main(){
     architecture
     creation_backupfolder
     backup_DC1
-    #compression_DC1
+    compression_DC1
 }
 
 main
